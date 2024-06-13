@@ -32,8 +32,8 @@
             <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label for="excelFile" class="form-label">Excel File</label>
-                    <input type="file" class="form-control" id="excelFile" name="excelFile" required>
+                    <label for="sample_excel_sheet" class="form-label">Excel File</label>
+                    <input type="file" class="form-control" id="sample_excel_sheet" name="sample_excel_sheet" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Upload</button>
             </form>

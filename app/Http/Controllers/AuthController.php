@@ -23,7 +23,6 @@ class AuthController extends Controller
         'password' => 'required|string|min:6|confirmed',
     ]);
 
-    // Check if user already exists
     $existingUser = User::where('email', $request->email)->first();
 
     if ($existingUser) {

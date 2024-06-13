@@ -13,7 +13,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Scheme code</th>
+                        <th>Id</th>
                         <th>Scheme Code</th>
                         <th>Scheme Name</th>
                         <th>Central State Scheme</th>

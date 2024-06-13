@@ -15,7 +15,7 @@
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" required>
                 @if ($errors->has('email'))
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                    <span class="text-danger">{{ $errors->first('pemail') }}</span>
                 @endif
             </div>
             <div class="mb-3">

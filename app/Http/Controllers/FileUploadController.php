@@ -11,43 +11,52 @@ class FileUploadController extends Controller
 {
     public function showUploadForm()
     {
-        $schemes = Scheme::all(); // Fetch all schemes from the database
+        $schemes = Scheme::all();
         return view('dashboard', ['schemes' => $schemes]);
     }
 
     public function upload(Request $request)
     {
         $request->validate([
-            'excelFile' => 'required|mimes:xlsx,xls',
+            'sample_excel_sheet' => 'required|mimes:xlsx,xls',
         ]);
 
-        $file = $request->file('excelFile');
+        $file = $request->file('sample_excel_sheet');
 
-        // Import the file and skip the first row
         $data = Excel::toArray(new SkipFirstRowImport, $file);
+        // print_r($data);
 
-        // Pass the data to the view for preview
         return view('preview', ['data' => $data[0]]);
     }
 
     public function finalizeUpload(Request $request)
-    {
-        $data = json_decode($request->input('data'), true);
+{
+    $data = json_decode($request->input('data'), true);
 
-        foreach ($data as $row) {
-            Scheme::create([
-                'scheme_code' => $row[0],
-                'scheme_name' => $row[1],
-                'central_state_scheme' => $row[2],
-                'financial_year' => $row[3],
-                'state_disbursement' => $this->castToNumeric($row[4]),
-                'central_disbursement' => $this->castToNumeric($row[5]),
-                'total_disbursement' => $this->castToNumeric($row[6]),
-            ]);
+    foreach ($data as $row) {
+        $id = $row[0];
+        $schemeData = [
+            'scheme_code' => $row[1],
+            'scheme_name' => $row[2],
+            'central_state_scheme' => $row[3],
+            'financial_year' => $row[4],
+            'state_disbursement' => $this->castToNumeric($row[5]),
+            'central_disbursement' => $this->castToNumeric($row[6]),
+            'total_disbursement' => $this->castToNumeric($row[7]),
+        ];
+
+        $existingScheme = Scheme::find($id);
+
+        if ($existingScheme) {
+            $existingScheme->update($schemeData);
+        } else {
+            Scheme::create(array_merge(['id' => $id], $schemeData));
         }
-
-        return redirect()->route('dashboard')->with('success', 'Data uploaded successfully!');
     }
+
+    return redirect()->route('dashboard')->with('success', 'Data uploaded successfully!');
+}
+
 
     private function castToNumeric($value)
     {

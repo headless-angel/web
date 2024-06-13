@@ -2,13 +2,19 @@
 
 namespace App\Imports;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToArray;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class SkipFirstRowImport implements ToCollection
+class SkipFirstRowImport implements ToArray, WithStartRow
 {
-    public function collection(Collection $rows)
+    public function array(array $row)
     {
-        return $rows->slice(1);
+        return $row;
+    }
+
+    public function startRow(): int
+    {
+        return 2;
     }
 }
+

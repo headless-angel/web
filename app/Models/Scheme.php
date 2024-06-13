@@ -10,12 +10,14 @@ class Scheme extends Model
     use HasFactory;
 
     protected $fillable = [
-        'scheme_code',
-        'scheme_name',
-        'central_state_scheme',
-        'financial_year',
-        'state_disbursement',
-        'central_disbursement',
-        'total_disbursement',
+        'id',
+        'scheme_code', 
+        'scheme_name', 
+        'central_state_scheme', 
+        'financial_year', 
+        'state_disbursement', 
+        'central_disbursement', 
+        'total_disbursement'
     ];
 }
+
