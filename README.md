@@ -33,7 +33,7 @@ This project is a web application with custom authentication, a user-friendly da
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/webapp.git
+    git clone https://github.com/headless-angel/web.git
     cd webapp
     ```
 
