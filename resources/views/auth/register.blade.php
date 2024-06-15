@@ -4,7 +4,6 @@
     <title>Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
-   
 </head>
 <body>
     <div class="container">
@@ -28,7 +27,7 @@
                     <span id="emailError" class="error-message"></span>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password <span class="text-muted">(min 6 characters)</span></label>
                     <input type="password" class="form-control" id="password" name="password" required>
                     <span id="passwordError" class="error-message"></span>
                 </div>
@@ -79,6 +78,9 @@
 
                 if (!passwordInput.value.trim()) {
                     passwordError.textContent = 'Password is required';
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters';
                     isValid = false;
                 } else {
                     passwordError.textContent = '';
