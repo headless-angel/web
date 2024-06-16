@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\PasswordResetController;
 
 $seasonStarted = true;
 
@@ -27,4 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('password/reset', [PasswordResetController::class, 'showResetForm'])->name('password.reset.form');
+    Route::post('password/reset', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
 });
